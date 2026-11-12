@@ -1,0 +1,28 @@
+== Salud de LocalStack
+s3: running | edition: pro 2026.10.7
+== Buckets
+[
+    "actividad3-seguro-local"
+]
+== Cifrado
+{
+    "SSEAlgorithm": "AES256"
+}
+== Bloqueo de acceso público
+{
+    "PublicAccessBlockConfiguration": {
+        "BlockPublicAcls": true,
+        "IgnorePublicAcls": true,
+        "BlockPublicPolicy": true,
+        "RestrictPublicBuckets": true
+    }
+}
+== Subir archivo de prueba
+subido: prueba.txt
+2026-11-11 21:53:38         49 prueba.txt
+== Descarga ANÓNIMA (sin firmar)
+RESULTADO: permitido (limitación del simulador, ver reporte)
+== Política del bucket
+
+aws: [ERROR]: An error occurred (NoSuchBucketPolicy) when calling the GetBucketPolicyStatus operation: The bucket policy does not exist
+(NoSuchBucketPolicy = no hay política; no implica exposición pública)

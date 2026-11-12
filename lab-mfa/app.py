@@ -67,7 +67,7 @@ MAX_ATTEMPTS = 5
 LOCKOUT_SECONDS = 300
 _failed = {"count": 0, "locked_until": 0.0}
 _last_used_step = {"value": -1}
-_enrolled_flag = BASE_DIR / ".enrolled"
+_enrolled_flag = Path(os.environ.get("ENROLLED_FLAG", BASE_DIR / ".enrolled"))
 
 
 # --------------------------------------------------------------------------

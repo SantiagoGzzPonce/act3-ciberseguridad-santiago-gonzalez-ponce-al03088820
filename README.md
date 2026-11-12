@@ -42,7 +42,7 @@ y bloqueo de `/setup` después del enrolamiento.
 ```bash
 cd lab-s3-localstack
 cp .env.example .env                # pega tu LOCALSTACK_AUTH_TOKEN
-docker compose up -d
+docker compose up -d                # o: podman compose up -d (rootless)
 curl -s http://localhost:4566/_localstack/health
 terraform init && terraform validate && terraform plan   # 3 recursos
 terraform apply
@@ -60,6 +60,12 @@ cd terraform && terraform init && terraform plan   # SG 443 + SSH /32, IAM míni
 
 `terraform plan -var admin_cidr=0.0.0.0/0` es rechazado por una validación: el
 código impide abrir SSH al mundo.
+
+## Notas de entorno
+
+- Probado en Bazzite (Fedora Atomic) con **Podman 5.8 rootless** + Docker Compose como proveedor,
+  para no añadir el usuario al grupo `docker` (equivale a root).
+- El token Hobby requiere la imagen `localstack/localstack-pro`; el volumen usa `:Z` por SELinux.
 
 ## Seguridad
 

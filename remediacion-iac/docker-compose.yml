@@ -18,6 +18,7 @@ services:
     env_file: ../lab-mfa/.env         # secretos fuera de la imagen y de Git
     environment:
       HARDENED: "true"
+      ENROLLED_FLAG: /tmp/.enrolled   # el FS raíz es de solo lectura
       COOKIE_SECURE: "false"          # true cuando haya TLS delante
     ports:
       - "127.0.0.1:8000:8000"         # solo localhost; el proxy TLS publica 443

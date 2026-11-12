@@ -1,0 +1,8 @@
+# Nada de secretos ni entornos locales dentro del contexto de build
+.env
+*.env
+venv/
+.venv/
+__pycache__/
+tests/
+.enrolled

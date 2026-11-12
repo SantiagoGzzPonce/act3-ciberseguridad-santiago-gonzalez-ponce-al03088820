@@ -2,7 +2,7 @@
 # El token NO va aquí: se lee de la variable de entorno / archivo .env (ignorado por Git).
 services:
   localstack:
-    image: localstack/localstack:4.0
+    image: localstack/localstack-pro:2026.10   # Hobby usa la imagen pro con token
     container_name: localstack-act3
     ports:
       - "127.0.0.1:4566:4566"          # solo localhost, nunca 0.0.0.0
@@ -11,9 +11,10 @@ services:
       - SERVICES=s3,iam,ec2,sts
       - DEBUG=0
     volumes:
-      - "./volume:/var/lib/localstack"
+      - "./volume:/var/lib/localstack:Z"   # :Z = etiqueta SELinux (Fedora/Bazzite)
     healthcheck:
-      test: ["CMD", "curl", "-fs", "http://localhost:4566/_localstack/health"]
+      # La imagen ya no trae curl; se usa Python, que sí incluye
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:4566/_localstack/health')"]
       interval: 10s
       timeout: 5s
       retries: 10

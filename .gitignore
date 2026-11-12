@@ -22,3 +22,4 @@ lab-s3-localstack/descarga-anonima.txt
 *.pem
 *.key
 token*
+tfplan
