@@ -1,0 +1,32 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ListarSoloElBucketDeLaApp",
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::mi-bucket-web-app-produccion"
+    },
+    {
+      "Sid": "LeerEscribirObjetosDelBucketDeLaApp",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:PutObject"],
+      "Resource": "arn:aws:s3:::mi-bucket-web-app-produccion/*"
+    },
+    {
+      "Sid": "ExigirCifradoAlSubir",
+      "Effect": "Deny",
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::mi-bucket-web-app-produccion/*",
+      "Condition": {
+        "StringNotEquals": { "s3:x-amz-server-side-encryption": ["AES256", "aws:kms"] }
+      }
+    },
+    {
+      "Sid": "LeerSoloParametrosDeLaApp",
+      "Effect": "Allow",
+      "Action": ["ssm:GetParameter", "ssm:GetParameters"],
+      "Resource": "arn:aws:ssm:us-east-1:123456789012:parameter/mi-app/produccion/*"
+    }
+  ]
+}

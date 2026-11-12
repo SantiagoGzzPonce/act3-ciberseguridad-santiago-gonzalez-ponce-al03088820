@@ -1,0 +1,51 @@
+# Versión corregida de la propuesta de DeepSeek (paso 7)
+# Cambios marcados con  # [FIX n]  -> ver docs/bitacora-ia.md
+services:
+  proxy:
+    image: nginxinc/nginx-unprivileged:1.27-alpine   # [FIX 1] nginx sin root (UID 101)
+    restart: unless-stopped
+    ports:
+      - "80:8080"      # solo para redirigir a HTTPS
+      - "443:8443"     # [FIX 3] TLS
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./certs:/etc/nginx/certs:ro
+    read_only: true                                   # [FIX 2]
+    tmpfs:
+      - /tmp:size=16m,noexec,nosuid,nodev
+    cap_drop: [ALL]                                   # [FIX 2]
+    security_opt: ["no-new-privileges:true"]          # [FIX 2]
+    pids_limit: 100
+    mem_limit: 128m
+    cpus: 0.5
+    depends_on:
+      app:
+        condition: service_healthy
+    networks: [frontend]
+
+  app:
+    image: mi-registro/mi-app-web:1.0.0
+    user: "10001:10001"                               # [FIX 1] nunca root
+    restart: unless-stopped
+    expose: ["3000"]
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+    read_only: true                                   # [FIX 2]
+    tmpfs:
+      - /tmp:size=32m,noexec,nosuid,nodev
+    cap_drop: [ALL]                                   # [FIX 2]
+    security_opt: ["no-new-privileges:true"]          # [FIX 2]
+    pids_limit: 200
+    mem_limit: 512m
+    cpus: 1.0
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/health"]
+      interval: 30s
+      timeout: 3s
+    networks: [frontend]
+
+networks:
+  frontend:
+    driver: bridge
+# Sin "version:" (obsoleto en Compose v2), sin docker.sock, sin privileged.
