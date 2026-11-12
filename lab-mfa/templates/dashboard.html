@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2 class="ok">Acceso concedido</h2>
+<p>Hola, <b>{{ user }}</b>. Completaste contraseña + TOTP.</p>
+<form method="post" action="{{ url_for('logout') }}">
+  <button type="submit">Cerrar sesión</button>
+</form>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Verificar código{% endblock %}
+{% block content %}
+<h2>Factor 2 · Código TOTP</h2>
+<p>Escribe el código de 6 dígitos de tu app autenticadora.
+  {% if hardened %}<span class="badge">modo reforzado</span>{% endif %}</p>
+<form method="post" action="{{ url_for('verify') }}" autocomplete="off">
+  <label for="code">Código</label>
+  <input id="code" name="code" inputmode="numeric" pattern="[0-9 ]{6,7}" maxlength="7" required>
+  <button type="submit">Verificar</button>
+</form>
+<p><a href="{{ url_for('setup') }}">¿Aún no registras el autenticador? Configurar</a></p>
+{% endblock %}

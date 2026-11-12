@@ -1,0 +1,15 @@
+$ ss -tlnp | grep 5001
+LISTEN 0      128        127.0.0.1:5001       0.0.0.0:*    users:(("python",pid=24236,fd=3)) 
+
+/            GET -> 200 
+/dashboard   GET -> 302 http://127.0.0.1:5001/
+/setup       GET -> 302 http://127.0.0.1:5001/
+/verify      GET -> 302 http://127.0.0.1:5001/
+/logout      GET -> 405 
+/admin       GET -> 404 
+
+$ curl -sI http://127.0.0.1:5001/
+HTTP/1.1 200 OK
+Server: Werkzeug/3.1.9 Python/3.12.3
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY

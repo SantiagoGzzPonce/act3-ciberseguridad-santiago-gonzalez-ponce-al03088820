@@ -1,0 +1,24 @@
+# Secretos y estado (nunca a Git)
+.env
+*.env
+!.env.example
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terraform/
+.terraform.lock.hcl
+crash.log
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+lab-mfa/.enrolled
+# LocalStack
+lab-s3-localstack/volume/
+lab-s3-localstack/prueba.txt
+lab-s3-localstack/descarga-anonima.txt
+# Varios
+*.pem
+*.key
+token*

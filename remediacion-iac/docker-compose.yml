@@ -1,0 +1,30 @@
+# Despliegue seguro de la app MFA (pasos 6.1 - 6.3)
+services:
+  mfa-app:
+    build:
+      context: ../lab-mfa
+      dockerfile: ../remediacion-iac/Dockerfile
+    image: act3/mfa-app:hardened
+    user: "10001:10001"              # refuerza el USER del Dockerfile
+    read_only: true                   # sistema de archivos raíz de solo lectura
+    tmpfs:
+      - /tmp:size=16m,noexec,nosuid,nodev   # única zona escribible, efímera
+    cap_drop: [ALL]                   # sin capacidades del kernel
+    security_opt:
+      - no-new-privileges:true        # bloquea escalada vía setuid/sudo
+    pids_limit: 100
+    mem_limit: 256m
+    cpus: 0.5
+    env_file: ../lab-mfa/.env         # secretos fuera de la imagen y de Git
+    environment:
+      HARDENED: "true"
+      COOKIE_SECURE: "false"          # true cuando haya TLS delante
+    ports:
+      - "127.0.0.1:8000:8000"         # solo localhost; el proxy TLS publica 443
+    networks: [frontend]
+    restart: unless-stopped
+    # NO se monta /var/run/docker.sock ni se usa privileged: true
+
+networks:
+  frontend:
+    driver: bridge

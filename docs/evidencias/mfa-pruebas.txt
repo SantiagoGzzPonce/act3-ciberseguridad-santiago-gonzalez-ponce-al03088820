@@ -1,0 +1,18 @@
+test_codigo_no_reutilizable (test_app.ControlesHardened.test_codigo_no_reutilizable) ... ok
+test_limite_intentos (test_app.ControlesHardened.test_limite_intentos) ... ok
+test_setup_bloqueado_tras_enrolar (test_app.ControlesHardened.test_setup_bloqueado_tras_enrolar) ... ok
+test_falla_A_setup_expone_secreto_solo_con_contrasena (test_app.FallasModoLab.test_falla_A_setup_expone_secreto_solo_con_contrasena) ... ok
+test_falla_B_sin_limite_de_intentos (test_app.FallasModoLab.test_falla_B_sin_limite_de_intentos) ... ok
+test_falla_C_reutilizacion_de_codigo (test_app.FallasModoLab.test_falla_C_reutilizacion_de_codigo) ... ok
+test_1_credenciales_incorrectas (test_app.FuncionalesLab.test_1_credenciales_incorrectas) ... ok
+test_2_contrasena_correcta_pide_totp (test_app.FuncionalesLab.test_2_contrasena_correcta_pide_totp) ... ok
+test_3_totp_invalido_bloquea (test_app.FuncionalesLab.test_3_totp_invalido_bloquea) ... ok
+test_4_codigo_vigente_entra (test_app.FuncionalesLab.test_4_codigo_vigente_entra) ... ok
+test_5_dashboard_sin_sesion (test_app.FuncionalesLab.test_5_dashboard_sin_sesion) ... ok
+test_6_logout_impide_volver (test_app.FuncionalesLab.test_6_logout_impide_volver) ... ok
+test_7_logout_por_get_no_permitido (test_app.FuncionalesLab.test_7_logout_por_get_no_permitido) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.157s
+
+OK

@@ -1,0 +1,19 @@
+# LocalStack (plan Hobby) - simula AWS solo en localhost.
+# El token NO va aquí: se lee de la variable de entorno / archivo .env (ignorado por Git).
+services:
+  localstack:
+    image: localstack/localstack:4.0
+    container_name: localstack-act3
+    ports:
+      - "127.0.0.1:4566:4566"          # solo localhost, nunca 0.0.0.0
+    environment:
+      - LOCALSTACK_AUTH_TOKEN=${LOCALSTACK_AUTH_TOKEN:?Define LOCALSTACK_AUTH_TOKEN en .env}
+      - SERVICES=s3,iam,ec2,sts
+      - DEBUG=0
+    volumes:
+      - "./volume:/var/lib/localstack"
+    healthcheck:
+      test: ["CMD", "curl", "-fs", "http://localhost:4566/_localstack/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10

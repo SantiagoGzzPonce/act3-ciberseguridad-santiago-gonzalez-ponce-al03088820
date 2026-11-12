@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Registrar autenticador{% endblock %}
+{% block content %}
+<h2>Registrar autenticador</h2>
+<ol>
+  <li>Abre Google Authenticator (u otra app TOTP).</li>
+  <li>Elige <b>Agregar código → Ingresar clave de configuración</b>.</li>
+  <li>Cuenta: <b>{{ session.get('user') }}</b> · Clave: <code>{{ secret }}</code> · Tipo: basada en tiempo.</li>
+</ol>
+<p>URI de enrolamiento (la que codifica el QR):<br><code>{{ uri }}</code></p>
+<p><b>Mantén esta clave privada:</b> quien la conozca puede generar códigos válidos
+para siempre, sin tener tu teléfono. No la incluyas en capturas.</p>
+<p><a href="{{ url_for('verify') }}">Volver a verificar</a></p>
+{% endblock %}
