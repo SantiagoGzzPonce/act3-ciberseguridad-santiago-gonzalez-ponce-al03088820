@@ -1,7 +1,8 @@
 # Bitácora técnica — Auditoría de una configuración generada por IA
 
 **Fecha:** 2026-11-11
-**Herramienta de IA:** DeepSeek (chat web, sin contexto previo)
+**Herramienta de IA:** DeepSeek (chat web, sin contexto previo, Smart Search activo: consultó 15 páginas)  
+**Evidencia:** [captura de la conversación](evidencias/16-deepseek.png)
 **Alumno:** Santiago Gonzalez Ponce — AL03088820
 
 ## 1. Prompt
